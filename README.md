@@ -11,7 +11,7 @@ claude-data-lab/
 └── .env.example       # Required environment variables
 ```
 
-Each project lives in its own folder under `projects/` with its own `requirements.txt` and README.
+Each project lives in its own folder under `projects/`. Dependencies are shared via the root `requirements.txt`.
 
 ## Setup
 
@@ -20,15 +20,14 @@ Each project lives in its own folder under `projects/` with its own `requirement
    cp .env.example .env
    ```
 
-2. Navigate to a project folder and install its dependencies:
+2. Install dependencies:
    ```bash
-   cd projects/chat
    pip install -r requirements.txt
    ```
 
-3. Run the project:
+3. Run a project:
    ```bash
-   python chat.py
+   python projects/chat/chat.py
    ```
 
 ## Projects
