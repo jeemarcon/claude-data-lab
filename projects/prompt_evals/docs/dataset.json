@@ -1,0 +1,11 @@
+[
+  {
+    "task": "Write a Python function that extracts the AWS account ID from an ARN string. The function should take an ARN as input and return the 12-digit account ID."
+  },
+  {
+    "task": "Create a JSON object that represents an AWS S3 bucket policy allowing public read access to all objects in the bucket named 'my-public-bucket'."
+  },
+  {
+    "task": "Write a regular expression that matches valid AWS EC2 security group IDs. Valid IDs start with 'sg-' followed by 8 or 17 hexadecimal characters."
+  }
+]

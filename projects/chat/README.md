@@ -5,7 +5,7 @@ Interactive multi-turn chat with Claude running in the terminal.
 ## Setup
 
 ```bash
-pip install -r requirements.txt
+pip install -r ../../requirements.txt
 ```
 
 ## Files
