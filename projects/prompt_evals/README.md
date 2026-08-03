@@ -1,57 +1,43 @@
 # Prompt Evals
 
-Avalia a qualidade de respostas geradas pelo Claude usando um modelo como juiz (LLM-as-a-judge).
-
-O projeto foca em tarefas AWS que exigem Python, JSON ou Regex. O dataset é gerado automaticamente pelo próprio Claude, e cada resposta é avaliada por um segundo modelo que atribui pontuação e justificativa.
+Conjunto de experimentos para avaliação de prompts usando o Claude como juiz (LLM-as-a-judge).
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `prompt_eval.py` | Gera o dataset de tarefas e salva em `docs/dataset.json` |
-| `prompt_eval_grader.py` | Gera dataset com critérios de solução, executa cada tarefa e salva os resultados em `docs/` |
+| `prompt_eval.py` | Gera dataset de tarefas AWS e salva em `docs/dataset.json` |
+| `prompt_eval_grader.py` | Gera dataset com critérios, executa cada tarefa e salva resultados em `docs/` |
+| `prompt_engineer.py` | `PromptEvaluator` — classe com geração de dataset e avaliação concorrente; salva relatório HTML em `docs/` |
+| `prompt_eval_from_zero.py` | Avaliador simples construído do zero: executa um prompt, avalia a saída e salva relatório HTML |
+| `app.py` | Servidor Flask com interface web — recebe o prompt via browser e exibe a avaliação dinamicamente |
 
-## How it works
-
-```
-generate_dataset()
-    └── Claude gera N tarefas no formato JSON (task, format, solution_criteria)
-
-run_eval(dataset)
-    └── para cada tarefa:
-        ├── run_prompt()       → Claude resolve a tarefa
-        └── grade_by_model()   → Claude avalia a solução (score 1-10 + strengths/weaknesses)
-```
-
-## Run
+## How to run
 
 ```bash
-# Apenas gerar o dataset
+# Gerar dataset de tarefas AWS e avaliar
 python prompt_eval.py
-
-# Gerar dataset, rodar avaliação e salvar resultados
 python prompt_eval_grader.py
+
+# Avaliador com PromptEvaluator (execução concorrente + relatório HTML)
+python prompt_engineer.py
+
+# Avaliador simples — salva docs/eval_report.html
+python prompt_eval_from_zero.py
+
+# Interface web (acesse http://localhost:5001)
+python app.py
 ```
 
 ## Output
 
-Os arquivos gerados ficam em `docs/`:
+Todos os arquivos gerados ficam em `docs/`:
 
 | File | Description |
 |------|-------------|
-| `docs/dataset.json` | Dataset de tarefas gerado por `prompt_eval.py` |
+| `docs/dataset.json` | Dataset gerado por `prompt_eval.py` |
 | `docs/dataset2.json` | Dataset com critérios gerado por `prompt_eval_grader.py` |
-| `docs/results.json` | Resultados da avaliação com score e reasoning por tarefa |
-
-## Result shape
-
-```json
-[
-  {
-    "output": "solução gerada pelo Claude",
-    "test_case": { "task": "...", "format": "...", "solution_criteria": "..." },
-    "score": 8,
-    "reasoning": "..."
-  }
-]
-```
+| `docs/results.json` | Resultados da avaliação do `prompt_eval_grader.py` |
+| `docs/output.json` | Resultados da avaliação do `prompt_engineer.py` |
+| `docs/output.html` | Relatório HTML do `prompt_engineer.py` |
+| `docs/eval_report.html` | Relatório HTML do `prompt_eval_from_zero.py` |
