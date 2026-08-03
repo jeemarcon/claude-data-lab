@@ -7,7 +7,8 @@ A personal data lab and study space for building AI-powered projects using the C
 ```
 claude-data-lab/
 ├── projects/
-│   └── chat/          # Multi-turn chat with Claude
+│   ├── chat/          # Multi-turn chat with Claude
+│   └── prompt_evals/  # LLM-as-a-judge prompt evaluation
 └── .env.example       # Required environment variables
 ```
 
@@ -35,3 +36,4 @@ Each project lives in its own folder under `projects/`. Dependencies are shared 
 | Project | Description |
 |---------|-------------|
 | [chat](projects/chat/) | Interactive multi-turn chat with Claude from the terminal |
+| [prompt_evals](projects/prompt_evals/) | LLM-as-a-judge evaluation of prompts for AWS tasks (Python, JSON, Regex) |
